@@ -1,0 +1,36 @@
+[package]
+name = "what_ticker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wit-bindgen-rt = { version = "0.34.0", features = ["bitflags"] }
+ndarray = "0.16.1"
+
+markov = "1.1.0"
+rand = "0.8"
+
+
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.132"
+
+regex = "1.1.1"
+
+anyhow = "1.0"
+
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+codegen-units = 1
+opt-level = "s"
+debug = false
+strip = true
+lto = true
+
+[package.metadata.component]
+package = "component:test-wasi"
+target = "lay3r:avs/task-queue@0.3.0"
+
+[package.metadata.component.dependencies]
